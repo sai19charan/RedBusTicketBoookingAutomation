@@ -7,7 +7,7 @@ let obj={
     to :"Vijayawada",
     date:"21 Jul 2024",
     board:"Kondapur",
-    drop:"Varadhi",
+    drop:"Benz Circle",
     name:"Harsha",
     gender:"Male",
     age:"21",
@@ -54,12 +54,13 @@ const calling=async function(){
             let dayvalue = await page.evaluate(el => el.textContent, days2[i])
             if(dayvalue==day) await days2[i].click()
         }
-        await page.click(".sc-ifAKCX.gLwVlD")
-        await page.click(".sc-ifAKCX.gLwVlD")
+        // await page.click(".sc-ifAKCX.gLwVlD")
+        // await page.click(".sc-ifAKCX.gLwVlD")
         await page.click("#search_button")
         await delay(2000);
-        await page.click(".sc-ifAKCX.gLwVlD")
+        // await page.click(".sc-ifAKCX.gLwVlD")
         await page.click("#search_button")
+        await waitandclick("#search_button",page)
         await delay(2000);
         await page.mouse.wheel({
             deltaY: 1000,
@@ -139,10 +140,11 @@ const calling=async function(){
             }
         }
         let op2=await page.$$(".db.oh")
+        let boardb=1,dropb=1;
         for(let i=0;i<op2.length;i++){
             value = await page.evaluate(el => el.textContent, op2[i])
-            if(value.includes(obj.board)) {console.log(value);await op2[i].click(".radio-css")}
-            if(value.includes(obj.drop)) {console.log(value);await op2[i].click(".radio-css")}
+            if(value.includes(obj.board)&&boardb) {console.log(value);await op2[i].click(".radio-css");boardb=0;}
+            if(value.includes(obj.drop)&&dropb) {console.log(value);await op2[i].click(".radio-css");dropb=0;}
             
         }
         await page.click(".button.continue.inactive")
